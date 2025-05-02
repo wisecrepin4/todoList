@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="styles/to-do-list.css">
+</head>
+<body>
+  
+  <p>Todo List Practice 1</p>
+  <div class="input-grid">
+    <input placeholder="Todo name" class="input">
+    <input type="date" class="dueDate">
+    <button  class="add-button" onclick="adding();">Add</button>
+
+  </div>
+  
+  <div class="list"></div>
+  
+  
+
+  <script>
+    
+     let todoarr=[{
+      name:'work at home',
+      dueDate:'2024-06-03'
+     },{
+      name:'visit my friend',
+      dueDate:'2024-06-03'
+     }];
+     let list='';
+     let val='';
+     function rendertodolist(){  
+     list='';
+
+
+     todoarr.forEach((value,i)=> {
+      const name=todoarr[i].name;
+     const dueDate=todoarr[i].dueDate;
+
+    list= list +` 
+    <div class="to-do-list-grid">
+      <div>${name}</div>
+      <div> ${dueDate}</div>  
+      <button onclick=" 
+      todoarr.splice(${i},1); 
+      rendertodolist();
+      " class="delete-button">Delete</button>
+      </div>`;
+    
+      
+     });//using for each method instead of the actual for loop
+   /*for(let i=0;i<todoarr.length;i++){
+     
+    }
+   */
+  document.querySelector('.list').innerHTML= `${list}`;
+
+   }  
+   rendertodolist();
+ document.querySelector('.dueDate').addEventListener('keydown',(event)=>{
+  if (event.key==='Enter'){
+    adding();
+  }
+ });
+      function adding(){
+     
+        let name='';
+        name =document.querySelector('.input');
+        let nameValue=name.value;
+        let dueDate=document.querySelector('.dueDate');
+        let dueDateValue=dueDate.value;
+         
+         if (nameValue){
+      
+      
+
+        todoarr.push({
+          name: nameValue,
+          dueDate: dueDateValue
+        });
+        rendertodolist();
+        name.value='';
+        dueDate.value='';
+        }
+      } 
+       
+      
+      //console.log(Event.key);
+    </script>
+</body>
+
+</html>
